@@ -1,12 +1,10 @@
-function handleClick() {
-  console.log("Clicked");
-}
-
-export default function () {
+export default function ({ message, buttonText }) {
+  function handleClick() {
+    alert(message);
+  }
   return (
     <div>
-      <p>Click the button</p>
-      <button onClick={handleClick}>Click</button>
+      <button onClick={handleClick}>{buttonText}</button>
     </div>
   );
 }
