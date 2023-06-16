@@ -1,22 +1,32 @@
 import { useState } from "react";
-function ScoreKeeper() {
-  const [scores, setScores] = useState({ p1Score: 0, p2Score: 0 });
-  function increaseP1Score() {
-    setScores((oldScores) => {
-      return { ...oldScores, p1Score: oldScores.p1Score + 1 };
+function ScoreKeeper({ numPlayers = 3, target = 5 }) {
+  const [scores, setScores] = useState(new Array(numPlayers).fill(0));
+  const updateScore = (i) => {
+    return setScores((OldScores) => {
+      return OldScores.map((score, idx) => {
+        if (i === idx) return score + 1;
+        return score;
+      });
     });
-  }
-  function increaseP2Score() {
-    setScores((oldScores) => {
-      return { ...oldScores, p2Score: oldScores.p2Score + 1 };
-    });
-  }
+  };
+  const reset = () => {
+    setScores(new Array(numPlayers).fill(0));
+  };
   return (
     <div>
-      <p>Player 1: {scores.p1Score}</p>
-      <p>Player 2: {scores.p2Score}</p>
-      <button onClick={increaseP1Score}>+1 Player 1</button>
-      <button onClick={increaseP2Score}>+1 Player 2</button>
+      <h1>Score Keeper</h1>
+      <ul>
+        {scores.map((s, i) => {
+          return (
+            <li key={i}>
+              Player {i + 1}: {s}{" "}
+              <button onClick={() => updateScore(i)}>+1</button>
+              {s === target && "Winner"}
+            </li>
+          );
+        })}
+      </ul>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }

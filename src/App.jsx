@@ -1,10 +1,10 @@
 import "./App.css";
-import EmojiClicker from "./EmojiClicker";
+import ScoreKeeper from "./ScoreKeeper";
 
 function App() {
   return (
     <div>
-      <EmojiClicker />
+      <ScoreKeeper numPlayers={10} />
     </div>
   );
 }
