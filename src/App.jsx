@@ -1,10 +1,12 @@
 import "./App.css";
-import ScoreKeeper from "./ScoreKeeper";
+import Dice from "./Dice";
+import LuckeyN from "./LuckyN";
 
 function App() {
   return (
     <div>
-      <ScoreKeeper numPlayers={10} />
+      <LuckeyN numDice={2} goal={7} />
+      <LuckeyN numDice={3} goal={11} />
     </div>
   );
 }
