@@ -1,0 +1,8 @@
+.Button {
+    background-color: honeydew;
+    transition: .5s;
+}
+
+.Button:hover {
+    opacity: .5;
+}
