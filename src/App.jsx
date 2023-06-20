@@ -1,10 +1,10 @@
 import "./App.css";
-import SignUpForm from "./SignUpForm";
+import BetterSignUpForm from "./BetterSignUpForm";
 
 function App() {
   return (
     <div>
-      <SignUpForm />
+      <BetterSignUpForm />
     </div>
   );
 }
