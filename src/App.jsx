@@ -1,10 +1,10 @@
 import "./App.css";
-import BetterSignUpForm from "./BetterSignUpForm";
+import ShoppingList from "./ShoppingList";
 
 function App() {
   return (
     <div>
-      <BetterSignUpForm />
+      <ShoppingList />
     </div>
   );
 }
