@@ -3,13 +3,13 @@ import ShoppingListForm from "./ShoppingListForm";
 
 export default function ShoppingList() {
   const [items, setItems] = useState([
-    { id: 1, product: "banana", quantity: 12 },
-    { id: 2, product: "ice-cream", quantity: 1 },
+    { id: Math.random(), product: "banana", quantity: 12 },
+    { id: Math.random(), product: "ice-cream", quantity: 1 },
   ]);
 
   const addItem = (item) => {
     return setItems((currItems) => {
-      return [...currItems, { ...item, id: 9 }];
+      return [...currItems, { ...item, id: Math.random() }];
     });
   };
 
