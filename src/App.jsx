@@ -1,13 +1,12 @@
 import "./App.css";
-import ProfileViewerwithSearch from "./ProfileViewerWithSearch";
-import QuoteFetcher from "./QuoteFetcher";
-import Counter from "./counter";
+import FormDemo from "./FormDemo";
+import RatingDemo from "./RatingDemo";
 
 function App() {
   return (
     <div>
-      {/* <QuoteFetcher /> */}
-      <ProfileViewerwithSearch />
+      <RatingDemo />
+      <FormDemo></FormDemo>
     </div>
   );
 }
