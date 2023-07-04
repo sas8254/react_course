@@ -1,12 +1,12 @@
+import { CssBaseline } from "@mui/material";
 import "./App.css";
-import FormDemo from "./FormDemo";
-import RatingDemo from "./RatingDemo";
+import TodoList from "./TodoList";
 
 function App() {
   return (
     <div>
-      <RatingDemo />
-      <FormDemo></FormDemo>
+      <CssBaseline></CssBaseline>
+      <TodoList></TodoList>
     </div>
   );
 }
