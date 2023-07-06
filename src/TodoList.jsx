@@ -1,56 +1,73 @@
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Checkbox,
-} from "@mui/material";
-import { DeleteOutline } from "@mui/icons-material";
-import { useState } from "react";
+import { Box, List } from "@mui/material";
+import { useEffect, useState } from "react";
+import TodoItem from "./TodoItem";
+import TodoForm from "./TodoForm";
 
-const initialTodos = [
-  { id: 1, text: "study", completed: false },
-  { id: 2, text: "make a video", completed: true },
-  { id: 3, text: "copy game", completed: false },
-  { id: 4, text: "exercise", completed: true },
-];
+function getInitialData() {
+  const data = JSON.parse(localStorage.getItem("todos"));
+  if (!data) return [];
+  return data;
+}
 
 export default function TodoList() {
-  const [todos, setTodos] = useState(initialTodos);
-  return (
-    <div>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {todos.map((todo) => {
-          const labelId = `checkbox-list-label-${todo.id}`;
+  const [todos, setTodos] = useState(getInitialData);
 
-          return (
-            <ListItem
-              key={todo.id}
-              secondaryAction={
-                <IconButton edge="end" aria-label="comments">
-                  <DeleteOutline />
-                </IconButton>
-              }
-              disablePadding
-            >
-              <ListItemButton role={undefined} dense>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={todo.completed}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={todo.text} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
-    </div>
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  function removeTodo(id) {
+    setTodos((oldTodos) => {
+      return oldTodos.filter((t) => t.id !== id);
+    });
+  }
+
+  function toggleTodo(id) {
+    setTodos((oldTodos) => {
+      return oldTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      });
+    });
+  }
+
+  function addTodo(text) {
+    return setTodos((oldTodos) => {
+      return [...oldTodos, { id: crypto.randomUUID(), text, completed: false }];
+    });
+  }
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        m: 3,
+      }}
+    >
+      <h1>Todos</h1>
+      <div>
+        <List
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        >
+          {todos.map((todo) => {
+            return (
+              <TodoItem
+                todo={todo}
+                key={todo.id}
+                rmfunc={removeTodo}
+                toggle={() => toggleTodo(todo.id)}
+              ></TodoItem>
+            );
+          })}
+          <TodoForm addTask={addTodo}></TodoForm>
+        </List>
+      </div>
+    </Box>
   );
 }
